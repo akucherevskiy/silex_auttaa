@@ -11,8 +11,26 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
+
+
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/development.log',
+));
+
+// Provides URL generation
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+// Provides CSRF token generation
+$app->register(new Silex\Provider\FormServiceProvider());
+
+// Provides session storage
+$app->register(new Silex\Provider\SessionServiceProvider(), array(
+    'session.storage.save_path' => __DIR__.'/cache'
+));
+
+// Provides Twig template engine
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views'
 ));
 
 $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
@@ -21,18 +39,17 @@ $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
             'key' => '298809946967213',
             'secret' => 'a35b0f986ac2a63b5e0bf97febbad6e6',
             'scope' => array('email'),
-//            'user_endpoint' => 'https://graph.facebook.com/me'
-            'user_endpoint' => 'http://localhost:8000/web/index.php/login'
+            'user_endpoint' => 'https://graph.facebook.com/me'
         ),
-//        'twitter' => array(
-//            'key' => TWITTER_API_KEY,
-//            'secret' => TWITTER_API_SECRET,
-//            'scope' => array(),
-//            'user_endpoint' => 'https://api.twitter.com/1.1/account/verify_credentials.json'
-//        ),
+        'twitter' => array(
+            'key' => "SyQSJpt83AsZE9GSgYiivqTOV",
+            'secret' => "rdkqHX9VcX2LxA2jkOLg1y7Mdq89kAUeAeLUmHBFCp9WVW9AD9",
+            'scope' => array(),
+            'user_endpoint' => 'https://api.twitter.com/1.1/account/verify_credentials.json'
+        ),
 //        'google' => array(
-//            'key' => GOOGLE_API_KEY,
-//            'secret' => GOOGLE_API_SECRET,
+//            'key' => "973244655377-7gmbn4clhumb17nmsqes0p2u2udvf1um.apps.googleusercontent.com",
+//            'secret' => "rtr9dDnzUDznaT6lygkex-tD",
 //            'scope' => array(
 //                'https://www.googleapis.com/auth/userinfo.email',
 //                'https://www.googleapis.com/auth/userinfo.profile'
@@ -47,18 +64,6 @@ $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
 //        )
     )
 ));
-
-// Provides URL generation
-$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
-// Provides CSRF token generation
-$app->register(new Silex\Provider\FormServiceProvider());
-
-// Provides session storage
-$app->register(new Silex\Provider\SessionServiceProvider(), array(
-    'session.storage.save_path' => '/sessions'
-));
-
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'default' => array(
@@ -67,8 +72,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'oauth' => array(
                 //'login_path' => '/auth/{service}',
                 //'callback_path' => '/auth/{service}/callback',
-                'check_path' => '/hello/user',
-                'failure_path' => '/login',
+//                'check_path' => '/login/{service}/check',
+                'failure_path' => '/',
                 'with_csrf' => true
             ),
             'logout' => array(
@@ -83,6 +88,11 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     )
 ));
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views'
-));
+$app->before(function (Symfony\Component\HttpFoundation\Request $request) use ($app) {
+    $token = $app['security']->getToken();
+    $app['user'] = null;
+
+    if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
+        $app['user'] = $token->getUser();
+    }
+});

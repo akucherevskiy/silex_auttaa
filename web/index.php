@@ -1,25 +1,8 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: toha
- * Date: 7/27/14
- * Time: 1:23 AM
- * To change this template use File | Settings | File Templates.
- */
+
 require_once __DIR__.'/bootstrap.php';
 
-
-$app->before(function (Symfony\Component\HttpFoundation\Request $request) use ($app) {
-    $token = $app['security']->getToken();
-    $app['user'] = null;
-
-//    if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
-    if ($token) {
-        $app['user'] = $token->getUser();
-    }
-});
-
-$app->get('/login', function () use ($app) {
+$app->get('/', function () use ($app) {
     $services = array_keys($app['oauth.services']);
 
     return $app['twig']->render('index.twig', array(
@@ -35,11 +18,11 @@ $app->get('/login', function () use ($app) {
     ));
 });
 
-$app->match('/logout', function () {})->bind('logout');
+//$app->get('//login/{service}/check', function ($service) use ($app) {
+//    var_dump($service);
+//    var_dump($app['user']);
+//});
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    var_dump($app['user']);
-    return 'Hello '.$app->escape($name);
-});
+$app->match('/logout', function () {})->bind('logout');
 
 $app->run();
