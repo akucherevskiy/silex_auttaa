@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14b7bc39abf1a8468cefa664bb94dfbd",
+    "hash": "4838ed0838a38a46d54d66ab79f855f5",
     "packages": [
         {
             "name": "pimple/pimple",
@@ -993,58 +993,6 @@
             "time": "2014-05-14 19:07:24"
         },
         {
-            "name": "mheap/silex-predis",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mheap/Silex-Predis.git",
-                "reference": "0906ad607b3fddb05823ec39f37e0496ac9dab9a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mheap/Silex-Predis/zipball/0906ad607b3fddb05823ec39f37e0496ac9dab9a",
-                "reference": "0906ad607b3fddb05823ec39f37e0496ac9dab9a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "predis/predis": "*"
-            },
-            "require-dev": {
-                "silex/silex": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SilexPredis": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sven Eisenschmidt",
-                    "email": "sven.eisenschmidt@gmail.com",
-                    "homepage": "http://unsicherheitsagent.de/"
-                },
-                {
-                    "name": "Michael Heap",
-                    "email": "m@michaelheap.com",
-                    "homepage": "http://michaelheap.com/"
-                }
-            ],
-            "description": "PRedis extension for Silex",
-            "homepage": "https://github.com/mheap/Silex-Predis",
-            "keywords": [
-                "predis",
-                "redis",
-                "silex"
-            ],
-            "time": "2012-08-25 16:53:04"
-        },
-        {
             "name": "monolog/monolog",
             "version": "dev-master",
             "source": {
@@ -1488,109 +1436,6 @@
                 "xunit"
             ],
             "time": "2014-02-16 12:43:56"
-        },
-        {
-            "name": "predis/predis",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "cc748d509fee933fda7a4e32fd2a841169b6f968"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/cc748d509fee933fda7a4e32fd2a841169b6f968",
-                "reference": "cc748d509fee933fda7a4e32fd2a841169b6f968",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Predis\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete PHP client library for Redis",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2014-08-08 13:29:32"
-        },
-        {
-            "name": "predis/service-provider",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/PredisServiceProvider.git",
-                "reference": "c1f11793282f141854033b86dfdfc8ee150d9863"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/PredisServiceProvider/zipball/c1f11793282f141854033b86dfdfc8ee150d9863",
-                "reference": "c1f11793282f141854033b86dfdfc8ee150d9863",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "predis/predis": "~1.0",
-                "silex/silex": "~1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Predis\\Silex\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Predis service provider for the Silex microframework",
-            "homepage": "https://github.com/nrk/PredisServiceProvider",
-            "keywords": [
-                "predis",
-                "redis",
-                "silex"
-            ],
-            "time": "2014-08-06 09:57:30"
         },
         {
             "name": "swiftmailer/swiftmailer",

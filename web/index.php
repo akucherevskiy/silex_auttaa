@@ -8,15 +8,13 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 $app->get('/', function () use ($app) {
-    echo "123";
     return 'Welcome to Auttaa, fuck you';
 });
 
 $app->get('/user_auth/{email}/{secret_token}/{crd}', function ($email, $secret_token, $crd) use ($app) {
     if ($email && $secret_token && $crd){
         // create user model
-//        $app['predis']->set('1', '33');
-  //      var_dump($app['predis']->get('1'));
+        echo 'user_auth action';
                // create user in redis, insert email, token, crd
         return true;
     }
