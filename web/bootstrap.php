@@ -11,8 +11,6 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
-
-
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/development.log',
 ));
@@ -25,12 +23,21 @@ $app->register(new Silex\Provider\FormServiceProvider());
 
 // Provides session storage
 $app->register(new Silex\Provider\SessionServiceProvider(), array(
-    'session.storage.save_path' => __DIR__.'/cache'
+    'session.storage.save_path' => __DIR__ . '/cache'
 ));
 
 // Provides Twig template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views'
+    'twig.path' => __DIR__ . '/views'
+));
+
+// redis
+$app->register(new Predis\Silex\ClientServiceProvider(), array(
+    'predis.parameters' => 'tcp://127.0.0.1:6379/',
+    'predis.options' => array(
+        'profile' => '2.2',
+        'prefix' => 'silex:',
+    ),
 ));
 
 $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
@@ -47,32 +54,15 @@ $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
             'scope' => array(),
             'user_endpoint' => 'https://api.twitter.com/1.1/account/verify_credentials.json'
         ),
-//        'google' => array(
-//            'key' => "973244655377-7gmbn4clhumb17nmsqes0p2u2udvf1um.apps.googleusercontent.com",
-//            'secret' => "rtr9dDnzUDznaT6lygkex-tD",
-//            'scope' => array(
-//                'https://www.googleapis.com/auth/userinfo.email',
-//                'https://www.googleapis.com/auth/userinfo.profile'
-//            ),
-//            'user_endpoint' => 'https://www.googleapis.com/oauth2/v1/userinfo'
-//        ),
-//        'github' => array(
-//            'key' => GITHUB_API_KEY,
-//            'secret' => GITHUB_API_SECRET,
-//            'scope' => array('user:email'),
-//            'user_endpoint' => 'https://api.github.com/user'
-//        )
     )
 ));
+
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'default' => array(
             'pattern' => '^/',
             'anonymous' => true,
             'oauth' => array(
-                //'login_path' => '/auth/{service}',
-                //'callback_path' => '/auth/{service}/callback',
-//                'check_path' => '/login/{service}/check',
                 'failure_path' => '/',
                 'with_csrf' => true
             ),
@@ -87,12 +77,3 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/auth', 'ROLE_USER')
     )
 ));
-
-$app->before(function (Symfony\Component\HttpFoundation\Request $request) use ($app) {
-    $token = $app['security']->getToken();
-    $app['user'] = null;
-
-    if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
-        $app['user'] = $token->getUser();
-    }
-});

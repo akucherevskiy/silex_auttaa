@@ -22,8 +22,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Predis;
 
-/**
+    /**
  * Symfony HttpFoundation component Provider for sessions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
@@ -37,7 +38,6 @@ class SessionServiceProvider implements ServiceProviderInterface
         $this->app = $app;
 
         $app['session.test'] = false;
-
         $app['session'] = $app->share(function ($app) {
             if (!isset($app['session.storage'])) {
                 if ($app['session.test']) {
@@ -51,7 +51,8 @@ class SessionServiceProvider implements ServiceProviderInterface
         });
 
         $app['session.storage.handler'] = $app->share(function ($app) {
-            return new NativeFileSessionHandler($app['session.storage.save_path']);
+            $app['redis'] = new Predis\Client();
+            return new Predis\Session\Handler($app['redis']);
         });
 
         $app['session.storage.native'] = $app->share(function ($app) {
