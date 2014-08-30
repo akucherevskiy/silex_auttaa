@@ -4,6 +4,9 @@ use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\HttpFoundation\Request;
 require_once __DIR__.'/bootstrap.php';
 
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 $app->get('/', function () use ($app) {
     echo "123";
     return 'Welcome to Auttaa, fuck you';
