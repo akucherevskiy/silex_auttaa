@@ -6,7 +6,7 @@
  * Time: 1:25 AM
  * To change this template use File | Settings | File Templates.
  */
-
+echo __DIR__.'/../vendor/'; die;
 require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
