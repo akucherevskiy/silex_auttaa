@@ -36,7 +36,7 @@ $app->get('/map/{crd}', function ($crd) use ($app) {
     //return events in radius around user
     return $app->json($fakeData);
 })
--> value('crd', false);
+->value('crd', false);
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($code == 404 || $e->getMessage() == '404') {
