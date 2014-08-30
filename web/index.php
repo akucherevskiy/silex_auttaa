@@ -5,6 +5,7 @@ use \Symfony\Component\HttpFoundation\Request;
 require_once __DIR__.'/bootstrap.php';
 
 $app->get('/', function () use ($app) {
+    echo "123";
     return 'Welcome to Auttaa, fuck you';
 });
 
