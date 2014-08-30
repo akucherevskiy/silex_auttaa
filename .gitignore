@@ -1,0 +1,9 @@
+/phpunit.xml
+/vendor
+/build
+/composer.phar
+/.idea
+/web/cache
+/web/development.log
+composer.lock
+/doc
