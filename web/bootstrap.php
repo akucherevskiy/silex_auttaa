@@ -6,7 +6,6 @@
  * Time: 1:25 AM
  * To change this template use File | Settings | File Templates.
  */
-echo __DIR__.'/../vendor/'; die;
 require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
@@ -29,15 +28,6 @@ $app->register(new Silex\Provider\SessionServiceProvider(), array(
 // Provides Twig template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/views'
-));
-
-// redis
-$app->register(new Predis\Silex\ClientServiceProvider(), array(
-    'predis.parameters' => 'tcp://127.0.0.1:6379/',
-    'predis.options' => array(
-        'profile' => '2.2',
-        'prefix' => 'silex:',
-    ),
 ));
 
 $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(

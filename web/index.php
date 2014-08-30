@@ -15,8 +15,8 @@ $app->get('/', function () use ($app) {
 $app->get('/user_auth/{email}/{secret_token}/{crd}', function ($email, $secret_token, $crd) use ($app) {
     if ($email && $secret_token && $crd){
         // create user model
-        $app['predis']->set('1', '33');
-        var_dump($app['predis']->get('1'));
+//        $app['predis']->set('1', '33');
+  //      var_dump($app['predis']->get('1'));
                // create user in redis, insert email, token, crd
         return true;
     }

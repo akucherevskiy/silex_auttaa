@@ -50,9 +50,11 @@ class SessionServiceProvider implements ServiceProviderInterface
             return new Session($app['session.storage']);
         });
 
+
         $app['session.storage.handler'] = $app->share(function ($app) {
-            $app['redis'] = new Predis\Client();
-            return new Predis\Session\Handler($app['redis']);
+//            $app['redis'] = new Predis\Client();
+//            return new Predis\Session\Handler($app['redis']);
+            return new NativeFileSessionHandler($app['session.storage.save_path']);
         });
 
         $app['session.storage.native'] = $app->share(function ($app) {
