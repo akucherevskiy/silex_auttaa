@@ -67,3 +67,14 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/auth', 'ROLE_USER')
     )
 ));
+
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array (
+            'driver'    => 'pdo_mysql',
+            'host'      => 'localhost',
+            'dbname'    => 'auttaa',
+            'user'      => 'root',
+            'password'  => '',
+            'charset'   => 'utf8',
+    ),
+));

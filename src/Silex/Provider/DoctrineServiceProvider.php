@@ -29,7 +29,7 @@ class DoctrineServiceProvider implements ServiceProviderInterface
     {
         $app['db.default_options'] = array(
             'driver'   => 'pdo_mysql',
-            'dbname'   => null,
+            'dbname'   => 'auttaa',
             'host'     => 'localhost',
             'user'     => 'root',
             'password' => null,
