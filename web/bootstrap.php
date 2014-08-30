@@ -9,9 +9,6 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
 $app = new Silex\Application();
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -22,7 +19,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // Provides CSRF token generation
-//$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\FormServiceProvider());
 
 // Provides session storage
 $app->register(new Silex\Provider\SessionServiceProvider(), array(
