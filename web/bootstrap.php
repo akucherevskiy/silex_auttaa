@@ -22,7 +22,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // Provides CSRF token generation
-$app->register(new Silex\Provider\FormServiceProvider());
+//$app->register(new Silex\Provider\FormServiceProvider());
 
 // Provides session storage
 $app->register(new Silex\Provider\SessionServiceProvider(), array(
