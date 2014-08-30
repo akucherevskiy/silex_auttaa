@@ -15,6 +15,7 @@ $app->get('/user_auth/{email}/{secret_token}/{crd}', function ($email, $secret_t
     if ($email && $secret_token && $crd){
         // create user model
         echo 'user_auth action';
+
                // create user in redis, insert email, token, crd
         return true;
     }
