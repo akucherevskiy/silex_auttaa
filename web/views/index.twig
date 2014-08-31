@@ -1,13 +1,30 @@
-<div>
-    {% if app.user %}
-        <p>Hello {{ app.user.username }}! Your email is {{ app.user.email }}</p>
-        <a href="{{ logout_path }}">Logout</a>
-    {% else %}
-        <ul>
-            <li><a href="{{ login_paths.facebook }}">Login with Facebook</a></li>
-            <li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
-            {#<li><a href="{{ login_paths.google }}">Login with Google</a></li>#}
-            {#<li><a href="{{ login_paths.github }}">Login with GitHub</a></li>#}
-        </ul>
-    {% endif %}
+<!doctype html>
+<!--[if lte IE 8]><html class="lteie8"><![endif]-->
+<!--[if gt IE 8]><!--><html><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Auttaa web site</title>
+    <meta name="viewport" content="initial-scale=1"/>
+    <link rel="stylesheet" media="screen" href="views/css/screen.css" >
+    <script src="views/js/jquery.js"></script>
+    <script src="views/js/common.js"></script>
+</head>
+<body>
+<div class="total-wrp">
+    <div class="img-bg-wrp"></div>
+    <div class="login-wrp">
+        <div class="login-table-wrp">
+            <div class="login-wrp-inner">
+                <div class="big-logo">auttaa
+                    <div class="ico-logo"></div>
+                    <!-- <div class="logowrp"><img src="img/big-logo.png" alt="/"></div> -->
+                    <!-- <p class="main-p1">Project</p> -->
+                    <!-- <p class="main-p2"></p> -->
+                </div>
+                <a href="#" class="faseook-login"></a>
+            </div>
+        </div>
+    </div>
 </div>
+</body>
+</html>

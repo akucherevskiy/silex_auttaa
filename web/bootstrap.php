@@ -6,13 +6,13 @@
  * Time: 1:25 AM
  * To change this template use File | Settings | File Templates.
  */
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-    'monolog.logfile' => __DIR__.'/development.log',
-));
+//$app->register(new Silex\Provider\MonologServiceProvider(), array(
+//    'monolog.logfile' => __DIR__ . '/development.log',
+//));
 
 // Provides URL generation
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -69,12 +69,12 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options' => array (
-            'driver'    => 'pdo_mysql',
-            'host'      => 'localhost',
-            'dbname'    => 'auttaa',
-            'user'      => 'root',
-            'password'  => '',
-            'charset'   => 'utf8',
+    'db.options' => array(
+        'driver' => 'pdo_mysql',
+        'host' => 'localhost',
+        'dbname' => 'auttaa',
+        'user' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
     ),
 ));
