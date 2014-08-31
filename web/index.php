@@ -11,9 +11,12 @@ ini_set("display_errors", 1); // TODO rm
 
 $app->get('/', function () use ($app) {
     switch($_REQUEST['method']){
-        case "auth" : auth($app);
-//        case "map":   map($_REQUEST['method']);
+        case "auth" :             auth($app); break;
+        case "get_coordinates":   get_coordinates($app); break;
+        case "get_event":         get_event($app); break;
+        default:                  throw new Exception('404');
     }
+
     return new Response();
 });
 
@@ -49,6 +52,58 @@ function auth($app){
 //    $app['db']->executeUpdate(
 //        'DELETE FROM  users where NOW() - last_time > 600  or last_time IS NULL');
 }
+
+function get_coordinates($app){
+    $userId = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : false;
+    $token  = isset($_REQUEST['token']) ? $_REQUEST['token']: false;
+    $crd  = isset($_REQUEST['crd']) ? $_REQUEST['crd']: false;
+
+    if ($userId && $token && $token == 'veryfuckingsecretstring'){
+        if ($crd){
+            // обновить координаты человека
+            $sql = "UPDATE users SET last_time = ? , crd = ? WHERE user_id = ?";
+            $app['db']->executeUpdate($sql, array(time(), $crd, (int) $userId));
+
+            echo 'good update'; // TODO rm
+        }
+        $events = $app['db']->fetchAll('SELECT * FROM events');
+
+        $result = array();
+        foreach($events as $event){
+            $result[] = $event['crd'];
+        }
+
+        return json_encode($result);
+    } else {
+        throw new Exception('404');
+
+    }
+}
+
+function get_event($app){
+    $userId = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : false;
+    $token  = isset($_REQUEST['token']) ? $_REQUEST['token']: false;
+    $crd  = isset($_REQUEST['crd']) ? $_REQUEST['crd']: false;
+    $eventId  = isset($_REQUEST['eventId']) ? $_REQUEST['eventId']: false;
+
+    if ($userId && $token && $crd && $token == 'veryfuckingsecretstring'){
+        $event = $app['db']->fetchAll('SELECT * FROM events where ID = ?', array($eventId));
+
+        return json_encode(array('crd' => $event[0]['crd']));
+    } else {
+        throw new Exception('404');
+    }
+
+}
+
+
+
+
+
+
+
+
+
 
 $app->get('/user_auth/{email}/{secret_token}/{crd}', function ($email, $secret_token, $crd) use ($app) {
     if ($email && $secret_token && $crd){
